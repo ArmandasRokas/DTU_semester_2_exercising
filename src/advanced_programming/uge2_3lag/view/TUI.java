@@ -1,5 +1,6 @@
 package advanced_programming.uge2_3lag.view;
 
+import advanced_programming.uge2_3lag.functionality.IDance;
 import advanced_programming.uge2_3lag.functionality.IFunktionalitet;
 
 import java.util.Scanner;
