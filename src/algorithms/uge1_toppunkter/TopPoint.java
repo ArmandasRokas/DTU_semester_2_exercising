@@ -143,7 +143,6 @@ public class TopPoint {
 
     /**
      * Function searches the maximum number only in the center column
-     *
      * Return row number , takes column
      */
     public int findMaxnumberInCenterColumn_2D(int[][] array, int columnNumber){

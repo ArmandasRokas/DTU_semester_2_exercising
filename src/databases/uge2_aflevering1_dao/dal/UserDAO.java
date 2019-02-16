@@ -4,7 +4,6 @@ import databases.uge2_aflevering1_dao.dto.UserDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class UserDAO implements IUserDAO {
@@ -16,7 +15,25 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public UserDTO getUser(int userId) throws DALException {
-        return null;
+
+        UserDTO user = null;
+
+        try(Connection connection = DriverManager.getConnection(url + userName +"&"+ pass)){   // med det syntax behøver man ikke lave final og connection.close()
+            // try with resources
+            PreparedStatement pStmt = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
+            pStmt.setInt(1 ,userId);
+            ResultSet resultSet = pStmt.executeQuery();
+            resultSet.next();
+
+            user = new UserDTO(userId, resultSet.getString(2));
+            user.setRolesString(resultSet.getString(4));
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+        return user;
     }
 
     @Override
@@ -30,17 +47,12 @@ public class UserDAO implements IUserDAO {
         try(Connection connection = DriverManager.getConnection( url + userName +"&"+ pass)){
 
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM users WHERE active=1");
 
             while(resultSet.next()){
 
                 UserDTO userDTO = new UserDTO(resultSet.getInt(1), resultSet.getString(2));
-
-                List<String> rolesList = new ArrayList<>();
-                String roles = resultSet.getString(4);
-                String[] rolesArray = roles.split(",");
-                rolesList = Arrays.asList(rolesArray);
-                userDTO.setRoles(rolesList);
+                userDTO.setRolesString(resultSet.getString(4));
                 users.add(userDTO);
             }
 
@@ -97,6 +109,31 @@ public class UserDAO implements IUserDAO {
     @Override
     public void deleteUser(int userId) throws DALException {
 
+        try(Connection connection = DriverManager.getConnection( url + userName +"&"+ pass)){
 
+            PreparedStatement pStmt = connection.prepareStatement("UPDATE users SET active = 0 WHERE id = ?");
+            pStmt.setInt(1, userId);
+            pStmt.executeUpdate();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *  Set 1 value to 'active' attribute for the user, whose userID matches.
+     *  This means that the user is active again.
+     */
+    @Override
+    public void activateUser(int userId) throws DALException {
+        try(Connection connection = DriverManager.getConnection( url + userName +"&"+ pass)){
+
+            PreparedStatement pStmt = connection.prepareStatement("UPDATE users SET active = 1 WHERE id = ?");
+            pStmt.setInt(1, userId);
+            pStmt.executeUpdate();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }

@@ -2,6 +2,7 @@ package databases.uge2_aflevering1_dao.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class UserDTO implements Serializable {
@@ -70,6 +71,13 @@ public class UserDTO implements Serializable {
             }
         }
         return rolesString;
+    }
+
+    public void setRolesString(String rolesString){
+
+        String[] rolesArray = rolesString.split(",");
+        roles = Arrays.asList(rolesArray);
+
     }
 
     public void setRoles(List<String> roles) {
