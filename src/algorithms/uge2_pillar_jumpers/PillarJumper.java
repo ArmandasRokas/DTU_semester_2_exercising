@@ -131,6 +131,23 @@ public class PillarJumper
     // Finds a subarray with biggest total and it should be the minimum strength required
     public int findRequiredStrength_by_spliting(ArrayList<Integer> pillars, int n, int j){
 
+        int totalStrength = pillars.get(pillars.size()-1) - pillars.get(0); // last pillar - first pillar height
+        int avargTotalStrength = (int) Math.ceil((double)totalStrength/j);
+
+        int biggestNeighborsDifference = 0; // holds the value of the biggest difference by neighbors elements.
+
+        for(int i = 0; i < pillars.size()-1; i++){
+            int currDifference = pillars.get(i+1) - pillars.get(i);
+            if(currDifference > biggestNeighborsDifference){
+                biggestNeighborsDifference = currDifference;
+            }
+        }
+
+        if(biggestNeighborsDifference > avargTotalStrength){
+            return biggestNeighborsDifference;
+        }
+        // is neighbors is bigger than
+
         if(j%3 == 0 ){
             return 3;
         } else {
@@ -183,7 +200,7 @@ public class PillarJumper
                     int differenceAfterLastMove = rightSum - leftSum;
 
                     // checks in which subarray put the middle element.
-                    // subarrays sum total should be as equal as possible
+                    // considering that subarrays total should be as equally as possible
                     if(differenceAfterLastMove<=differenceBeforLastMove){
                         return findSplitPoint(arr, i, end, n/2);
                     } else {
