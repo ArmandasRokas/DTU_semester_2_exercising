@@ -143,7 +143,11 @@ public class PillarJumper
             }
         }
 
+        if (biggestNeighborsDifference == 0){ //checks if all pillars is the same high
+            return 1;
+        }
         if(biggestNeighborsDifference > avargTotalStrength){
+
             return biggestNeighborsDifference;
         }
         // is neighbors is bigger than
