@@ -24,6 +24,9 @@ public class Main {
 
         } catch (IUserDAO.DALException e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
+
+        System.out.println("Testing");
     }
 }

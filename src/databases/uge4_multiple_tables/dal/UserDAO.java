@@ -23,7 +23,7 @@ public class UserDAO implements IUserDAO {
        try(Connection connection = DriverManager.getConnection(url + userName + "&" + pass)){
 
            PreparedStatement pStmt = connection.prepareStatement(
-                   "SELECT * FROM users_without_roles WHERE id = ?");
+                   "SELECT * FROM users_without_roles1 WHERE id = ?");
 
            pStmt.setInt(1, userId);
            ResultSet resultSet = pStmt.executeQuery();
@@ -50,6 +50,8 @@ public class UserDAO implements IUserDAO {
 
        } catch (SQLException e){
            e.printStackTrace();
+           System.out.println("Error");
+           throw new DALException("SqlException", e);   // exceptions . Er det sådan????
        }
 
 
