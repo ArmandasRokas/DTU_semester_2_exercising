@@ -59,7 +59,6 @@ GROUP BY dept_name;
 /* Opgave 4.2
 */
 
-
 CREATE TABLE grade_points(
 amercian_grade TEXT,
 number_grade INT
@@ -68,7 +67,7 @@ number_grade INT
 INSERT INTO grade_points values("A-", 5);
 SELECT * FROM grade_points;
 
-/*
+/* Opgave 4.2 fortsætte
 Opret et View student_grades, der returnerer en liste over studerendes karakterer
 */
 CREATE VIEW student_grades 
@@ -77,7 +76,7 @@ JOIN takes
 ON amercian_grade = takes.grade;
 SELECT * FROM student_grades;
 
-/*
+/* Opgave 4.2 fortsætte
 Opret et View student_avg, der returnerer de studerende gennemsnit
  */
 CREATE VIEW student_avg 
