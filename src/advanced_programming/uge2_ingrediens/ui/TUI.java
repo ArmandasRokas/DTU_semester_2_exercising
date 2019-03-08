@@ -1,6 +1,6 @@
-package advanced_programming.ugu2_ingrediens.ui;
+package advanced_programming.uge2_ingrediens.ui;
 
-import advanced_programming.ugu2_ingrediens.data.IData;
+import advanced_programming.uge2_ingrediens.data.IData;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package advanced_programming.ugu2_ingrediens.ui;
+package advanced_programming.uge2_ingrediens.ui;
 
 
 public interface IUI {

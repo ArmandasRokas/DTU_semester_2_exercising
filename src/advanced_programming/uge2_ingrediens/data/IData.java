@@ -1,4 +1,4 @@
-package advanced_programming.ugu2_ingrediens.data;
+package advanced_programming.uge2_ingrediens.data;
 
 import java.util.List;
 
