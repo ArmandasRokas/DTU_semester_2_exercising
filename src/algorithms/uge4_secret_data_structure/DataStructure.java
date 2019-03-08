@@ -8,7 +8,6 @@ public class DataStructure {
 
     public String[] determineDataStructure(char[] chars, int[] ints) {
 
-        SFQ sfq = new SFQ();
 
 
         String[] output = new String[]{"YES", // queue
@@ -17,12 +16,7 @@ public class DataStructure {
 
         Deque<Integer> queue = new LinkedList<>();
         Deque<Integer> stack = new LinkedList<>();
-        Deque<Integer> smallestFirstQueue = new LinkedList<>(); // lave sin egen datastructure
-                                                                // som har 9 arrays for hver værdi
-
-        LinkedList<Integer> inserts = new LinkedList<>();
-
-        int countE = 0;
+        SFQ sfq = new SFQ();
 
 
         for(int i = 0; i < chars.length; i++){
@@ -31,8 +25,7 @@ public class DataStructure {
                 queue.addLast(ints[i]);
                 stack.addLast(ints[i]);
 
-                 smallestFirstQueue.addLast(ints[i]);
-                 inserts.add(ints[i]);
+                 sfq.add(ints[i]);
             } else { // Checks if the extract elements equals to expected element to be extracted
 
                 if(output[0] == "YES"){
@@ -48,22 +41,9 @@ public class DataStructure {
                 }
 
                 if (output[2] == "YES"){
-
-                    Collections.sort(inserts);
-                    int smallest = inserts.get(0);
-
-
-                    if(smallest != ints[i]){
+                    if(sfq.remove(ints[i]) != ints[i]){
                         output[2] = "NO";
-                    } else {
-                        inserts.remove(0);
-                        smallestFirstQueue.remove(smallest);
                     }
-
-                }
-                countE++;  // tests extracted elements for 50 times due to time limits
-                if(countE > 50){
-                    break;
                 }
 
             }
