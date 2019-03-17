@@ -33,8 +33,6 @@ public class UserDAO implements IUserDAO {
            user.setUserId(userId);
            user.setUserName(resultSet.getString(2));
            user.setIni(resultSet.getString(3));
-           user.setCpr(resultSet.getString(4));
-           user.setPassword(resultSet.getString(5));
 
            PreparedStatement pStmt1 = connection.prepareStatement(
                    "SELECT role FROM user_roles WHERE user_id = ?");
@@ -48,12 +46,14 @@ public class UserDAO implements IUserDAO {
            }
            user.setRoles(roles);
 
+           resultSet.close();
+           resultSet1.close();
+
        } catch (SQLException e){
            e.printStackTrace();
            System.out.println("Error");
            throw new DALException("SqlException", e);   // exceptions . Er det sådan????
        }
-
 
         return user;
     }
