@@ -9,12 +9,14 @@ public class TennisSpiller implements Runnable {
     private TennisSpiller opponent;
     private boolean harBolden;
     private boolean isOn;
+    private int maxCount;
 
 //    private CountDownLatch latch;
 
 
 
-    public TennisSpiller(String name){
+    public TennisSpiller(String name, int maxCount){
+        this.maxCount = maxCount;
         this.name = name;
         harBolden = false;
         isOn = true;
@@ -38,6 +40,7 @@ public class TennisSpiller implements Runnable {
     @Override
     public void run() {
 
+        int count = 0;
 
         while(true) {
             try {
@@ -53,10 +56,17 @@ public class TennisSpiller implements Runnable {
 
 //                    opponent.latchCountDown();
                     opponent.modtagBold();
+                    count++;
 
 
 
             }
+            if (count > maxCount){
+                System.out.println(name + " tabt");
+                System.exit(0);
+            }
+
+
 
 //            try {
 ////                latch.await();
