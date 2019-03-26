@@ -1,18 +1,16 @@
 USE s185144;
 CREATE TABLE account(
-account_number INT,
-balance INT CHECK  (balance >= 0));
+account_number INT PRIMARY KEY,
+balance INT NOT NULL CHECK (balance >= 0));
 
-
-
-DROP TABLE account;
-INSERT INTO account values(321, 20);
+INSERT INTO account values(456, 0);
 SELECT * FROM account;
 
+UPDATE account SET balance = balance - 10 WHERE account_number = 123;
 
 /*Transaction exampel*/
 START TRANSACTION;
-UPDATE account SET balance = balance + 30 WHERE account_number = 123;
+UPDATE account SET balance = balance  - 30 WHERE account_number = 12345;
 Commit; /* enten for bekræfte */
 Rollback; /* eller for revert Update*/
 

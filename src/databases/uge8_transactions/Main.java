@@ -7,7 +7,7 @@ public class Main {
         Transaction transaction = new Transaction();
         transaction.setAccountNumberFrom(123);
         transaction.setAccountNumberTo(456); // tru not to give value here
-        transaction.setAmount(-100);
+        transaction.setAmount(100);
 
         AccountRepository accountRepository = new AccountRepository();
         accountRepository.updateAccount(transaction);
