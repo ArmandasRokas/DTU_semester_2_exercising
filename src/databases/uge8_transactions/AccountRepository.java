@@ -35,6 +35,7 @@ public class AccountRepository {
             pStmtFrom.setInt(2, transaction.getAccountNumberFrom());
             pStmtFrom.executeUpdate();
 
+
             if(true){
                 throw new SQLException("Test exception");
             }
