@@ -8,6 +8,8 @@ import advanced_programming.uge2_3lag.view.TUI;
 public class Main {
 
     public static void main(String[] args) {
+        double i = 11.1;
+
         IData data = new Data();
         IFunktionalitet funktionalitet = new Funktionalitet(data);
         IDance dance = new FancyDance();
